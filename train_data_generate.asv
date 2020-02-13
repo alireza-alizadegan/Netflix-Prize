@@ -1,0 +1,25 @@
+close all; clear; clc;
+load NetflixData_1000_1000
+for i=1:1e3
+    for j=1:1e3
+        if Itrain(i,j)==1
+            train_data(i,j)=CompleteData(i,j);
+        else
+            train_data(i,j)=-1;
+        end
+    end
+end
+[U,S,V]=svd(A);
+train_count=0;
+test_count=0;
+for i=1:1e3
+    for j=1:1e3
+        if Itrain(i,j)==1
+            x_train(,train_count)=CompleteData(i,j);
+        else
+            train_data(i,j)=-1;
+        end
+    end
+end
+
+save('Netflix_data','x_train','y_train','x_test','y_test','-append')
